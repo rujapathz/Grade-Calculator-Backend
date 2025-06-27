@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: grade_calculator_postgres
+    image: postgres
+    environment:
+      POSTGRES_DB : 'gradeAdatabase'
+      POSTGRES_USER: 'rujapa'
+      POSTGRES_PASSWORD: 'tiantestDB'
+      PGDATA: '/data/postgres'
+      TZ: 'Asia/Bangkok'
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - '5432:5432'
+
+
+      
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    restart: unless-stopped
