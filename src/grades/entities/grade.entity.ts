@@ -14,5 +14,4 @@ export class GradeEntity {
 
     @Column({ type: 'text', nullable: true })
     grade: string;
-
 }
