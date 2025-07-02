@@ -57,6 +57,9 @@ DB_NAME=your_database
 - Database: PostgreSQL
 - Connection: Managed via TypeORM in `postgres.config.ts` using `.env` variables
 
+- Connection: Managed via TypeORM in postgres.config.ts using `.env` variables
+
+
 ### Using Docker
 
 `docker-compose.yml`

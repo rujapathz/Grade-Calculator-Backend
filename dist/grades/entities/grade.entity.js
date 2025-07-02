@@ -23,7 +23,7 @@ __decorate([
     __metadata("design:type", Number)
 ], GradeEntity.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    (0, typeorm_1.Column)({ type: 'text', unique: true }),
     __metadata("design:type", String)
 ], GradeEntity.prototype, "name", void 0);
 __decorate([
@@ -35,6 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], GradeEntity.prototype, "grade", void 0);
 exports.GradeEntity = GradeEntity = __decorate([
-    (0, typeorm_1.Entity)('grades')
+    (0, typeorm_1.Entity)('grades'),
+    (0, typeorm_1.Unique)(['name'])
 ], GradeEntity);
 //# sourceMappingURL=grade.entity.js.map
