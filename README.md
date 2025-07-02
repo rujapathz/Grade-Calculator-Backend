@@ -57,9 +57,6 @@ DB_NAME=your_database
 - Database: PostgreSQL
 - Connection: Managed via TypeORM in `postgres.config.ts` using `.env` variables
 
-- Connection: Managed via TypeORM in postgres.config.ts using `.env` variables
-
-
 ### Using Docker
 
 `docker-compose.yml`
@@ -128,7 +125,7 @@ src/
 #### Folder & File Descriptions
 
 - `config/`:
-  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from `env`
+  - `postgres.config.ts`: Database connection configuration using TypeORM and environment variables from `.env`
 - `grades/`:
   - `dto/`
     - `create-grade.dto.ts`: DTO for creating a new grade entry, includes validation rules
@@ -137,7 +134,7 @@ src/
   - `grade.entity.ts`: GradeEntity that maps to the grades table in PostgreSQL
 - `grades.controller.ts`: Handles HTTP requests and routes for the /grades endpoints
 - `grades.module.ts`: Declares and organizes all components related to the grades feature
-- `grades.service.ts`: Contains business logic for grade operations (create, read, update, delete)
+- `grades.service.ts`: Contains logic for grade operations (create, read, update, delete)
 - `app.controller.ts`: Default root controller
 - `app.module.ts`: Root module that imports all feature modules, including GradesModule
 - `main.ts`: Application entry point that bootstraps the NestJS app
