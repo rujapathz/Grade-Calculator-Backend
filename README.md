@@ -42,7 +42,7 @@ http://localhost:4000/grades
 
 ## Configuration
 
-Create a .env file in the project root with the following environment variables to configure the database connection.
+Create a `.env` file in the project root with the following environment variables to configure the database connection.
 
 ```bash
 DB_HOST=localhost
@@ -55,11 +55,11 @@ DB_NAME=your_database
 ## Database Setup
 
 - Database: PostgreSQL
-- Connection: Managed via TypeORM in postgres.config.ts using .env variables:
+- Connection: Managed via TypeORM in `postgres.config.ts` using `.env` variables
 
 ### Using Docker
 
-docker-compose.yml
+`docker-compose.yml`
 
 ```docker-compose
 version: '3.8'
@@ -93,7 +93,7 @@ docker-compose up -d
 
 Alternatively, you can manually create the grades table by running this SQL script.
 
-````sql
+```sql
 CREATE TABLE IF NOT EXISTS grades (
 id SERIAL PRIMARY KEY,
 name TEXT UNIQUE NOT NULL,
@@ -120,34 +120,34 @@ src/
 ├── app.controller.ts
 ├── app.module.ts
 ├── main.ts
-````
+```
 
 #### Folder & File Descriptions
 
-- config/:
-  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from env
-- grades/:
-  - dto/
-    - create-grade.dto.ts: DTO for creating a new grade entry, includes validation rules
-    - update-grade.dto.ts: DTO for updating a grade, with optional validated fields
-- entities/:
-  - grade.entity.ts: GradeEntity that maps to the grades table in PostgreSQL
-- grades.controller.ts: Handles HTTP requests and routes for the /grades endpoints
-- grades.module.ts: Declares and organizes all components related to the grades feature
-- grades.service.ts: Contains business logic for grade operations (create, read, update, delete)
-- app.controller.ts: Default root controller
-- app.module.ts: Root module that imports all feature modules, including GradesModule
-- main.ts: Application entry point that bootstraps the NestJS app
+- `config/`:
+  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from `env`
+- `grades/`:
+  - `dto/`
+    - `create-grade.dto.ts`: DTO for creating a new grade entry, includes validation rules
+    - `update-grade.dto.ts`: DTO for updating a grade, with optional validated fields
+- `entities/`:
+  - `grade.entity.ts`: GradeEntity that maps to the grades table in PostgreSQL
+- `grades.controller.ts`: Handles HTTP requests and routes for the /grades endpoints
+- `grades.module.ts`: Declares and organizes all components related to the grades feature
+- `grades.service.ts`: Contains business logic for grade operations (create, read, update, delete)
+- `app.controller.ts`: Default root controller
+- `app.module.ts`: Root module that imports all feature modules, including GradesModule
+- `main.ts`: Application entry point that bootstraps the NestJS app
 
 ## API Endpoints
 
-| Method | Endpoint    | Description                      |
-| ------ | ----------- | -------------------------------- |
-| GET    | /grades     | Get all grades or filter by name |
-| GET    | /grades/:id | Get grade by ID                  |
-| POST   | /grades     | Create new grade                 |
-| PATCH  | /grades/:id | Update grade by ID               |
-| DELETE | /grades/:id | Delete grade by ID               |
+| Method | Endpoint      | Description                      |
+| ------ | ------------- | -------------------------------- |
+| GET    | `/grades`     | Get all grades or filter by name |
+| GET    | `/grades/:id` | Get grade by ID                  |
+| POST   | `/grades`     | Create new grade                 |
+| PATCH  | `/grades/:id` | Update grade by ID               |
+| DELETE | `/grades/:id` | Delete grade by ID               |
 
 ## Validation
 
@@ -155,8 +155,8 @@ All input is validated using DTOs with class-validator.
 
 #### CreateGradeDto
 
-- name: required, must be a non-empty string
-- score: required, must be an integer between 0–100
+- `name`: required, must be a non-empty string
+- `score`: required, must be an integer between 0–100
 
 #### UpdateGradeDto
 
@@ -166,7 +166,7 @@ All input is validated using DTOs with class-validator.
 
 ## Libraries Used
 
-- @nestjs/common
-- @nestjs/typeorm
-- pg (PostgreSQL client)
-- class-validator, class-transformer
+- `@nestjs/common`
+- `@nestjs/typeorm`
+- `pg` (PostgreSQL client)
+- `class-validator`, `class-transformer`
