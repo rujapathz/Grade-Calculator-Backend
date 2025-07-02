@@ -55,7 +55,7 @@ DB_NAME=your_database
 ## Database Setup
 
 - Database: PostgreSQL
-- Connection: Managed via TypeORM in postgres.config.ts using .env variables:
+- Connection: Managed via TypeORM in postgres.config.ts using `.env` variables
 
 ### Using Docker
 
@@ -125,7 +125,7 @@ src/
 #### Folder & File Descriptions
 
 - `config/`:
-  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from env
+  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from `env`
 - `grades/`:
   - `dto/`
     - `create-grade.dto.ts`: DTO for creating a new grade entry, includes validation rules
