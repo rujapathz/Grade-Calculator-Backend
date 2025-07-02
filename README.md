@@ -42,7 +42,7 @@ http://localhost:4000/grades
 
 ## Configuration
 
-Create a .env file in the project root with the following environment variables to configure the database connection.
+Create a `.env` file in the project root with the following environment variables to configure the database connection.
 
 ```bash
 DB_HOST=localhost
@@ -55,11 +55,14 @@ DB_NAME=your_database
 ## Database Setup
 
 - Database: PostgreSQL
+- Connection: Managed via TypeORM in `postgres.config.ts` using `.env` variables
+
 - Connection: Managed via TypeORM in postgres.config.ts using `.env` variables
+
 
 ### Using Docker
 
-docker-compose.yml
+`docker-compose.yml`
 
 ```docker-compose
 version: '3.8'
