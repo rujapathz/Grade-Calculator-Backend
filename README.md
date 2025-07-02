@@ -24,29 +24,33 @@ This is the backend service of the Grade Calculator web application. It provides
 
 1. Install dependencies
 
-bash
+```bash
 yarn install
+```
 
 2. Start development server
 
-bash
+```bash
 yarn start:dev
+```
 
 3. Open in backend API
 
-bash
+```bash
 http://localhost:4000/grades
+```
 
 ## Configuration
 
 Create a .env file in the project root with the following environment variables to configure the database connection.
 
-bash
+```bash
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=your_user
 DB_PASSWORD=your_password
 DB_NAME=your_database
+```
 
 ## Database Setup
 
@@ -57,45 +61,50 @@ DB_NAME=your_database
 
 docker-compose.yml
 
-bash
+```docker-compose
 version: '3.8'
 
 services:
-postgres:
-container_name: grade_calculator_postgres
-image: postgres
-environment:
-POSTGRES_DB: your_database
-POSTGRES_USER: your_user
-POSTGRES_PASSWORD: your_password
-PGDATA: /data/postgres
-TZ: Asia/Bangkok
-volumes: - postgres-data:/data/postgres
-ports: - '5432:5432'
+  postgres:
+    container_name: grade_calculator_postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: your_database
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_password
+      PGDATA: /data/postgres
+      TZ: Asia/Bangkok
+    volumes:
+      - postgres-data:/data/postgres
+    ports:
+      - '5432:5432'
 
 volumes:
-postgres-data:
+  postgres-data:
+```
 
 Start PostgreSQL service
 
-bash
+```bash
 docker-compose up -d
+```
 
 ### Using SQL Script
 
 Alternatively, you can manually create the grades table by running this SQL script.
 
-sql
+````sql
 CREATE TABLE IF NOT EXISTS grades (
 id SERIAL PRIMARY KEY,
 name TEXT UNIQUE NOT NULL,
 score INTEGER,
 grade TEXT
 );
+```
 
 ## Project Structure
 
-bash
+```bash
 src/
 ├── config/
 │ └── postgres.config.ts
@@ -111,6 +120,7 @@ src/
 ├── app.controller.ts
 ├── app.module.ts
 ├── main.ts
+````
 
 #### Folder & File Descriptions
 
@@ -160,4 +170,3 @@ All input is validated using DTOs with class-validator.
 - @nestjs/typeorm
 - pg (PostgreSQL client)
 - class-validator, class-transformer
-- @nestjs/common
