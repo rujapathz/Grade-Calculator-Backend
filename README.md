@@ -1,6 +1,6 @@
 ## Overview
 
-This is the backend service of the Grade Calculator web application. It provides RESTful APIs to manage students' grade data including name, score, and calculated grade.
+This is the backend service of the Grade Calculator web application. It provides RESTful APIs to manage grade data including name, score, and calculated grade.
 
 ## Features
 
