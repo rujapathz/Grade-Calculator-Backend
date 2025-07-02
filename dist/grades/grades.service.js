@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const grade_entity_1 = require("./entities/grade.entity");
+const common_2 = require("@nestjs/common");
 let GradesService = class GradesService {
     gradeRepository;
     constructor(gradeRepository) {
@@ -24,11 +25,21 @@ let GradesService = class GradesService {
     }
     async create(createGradeDto) {
         try {
+            const extistName = await this.gradeRepository.findOneBy({ name: createGradeDto.name });
+            if (extistName) {
+                console.log("this name is already used kub");
+                throw new common_2.BadRequestException(`${createGradeDto.name} is already taken.`);
+            }
             const dataUser = this.gradeRepository.create(createGradeDto);
             const createResult = await this.gradeRepository.save(dataUser);
             return createResult;
         }
         catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                if (error.code === '23505') {
+                    throw new common_2.BadRequestException('ชื่อซ้ำในระบบ');
+                }
+            }
             throw error;
         }
     }
@@ -45,9 +56,23 @@ let GradesService = class GradesService {
         return findUserName;
     }
     async update(id, updateUserDto) {
-        await this.gradeRepository.update(id, updateUserDto);
-        const dataUserUpdate = await this.gradeRepository.findOneBy({ id });
-        return dataUserUpdate;
+        try {
+            if (updateUserDto.name) {
+                const existing = await this.gradeRepository.findOne({ where: { name: updateUserDto.name } });
+                if (existing && existing.id !== id) {
+                    console.log('🔧 Updating grade ID:', id, 'to name:', updateUserDto.name);
+                    throw new common_2.BadRequestException(`${updateUserDto.name} is already taken.`);
+                }
+            }
+            await this.gradeRepository.update(id, updateUserDto);
+            return this.gradeRepository.findOneBy({ id });
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError && error.code === '23505') {
+                throw new common_2.BadRequestException('ชื่อที่ต้องการอัปเดตซ้ำกับข้อมูลอื่นในระบบ');
+            }
+            throw error;
+        }
     }
     remove(id) {
         return this.gradeRepository.delete(id);

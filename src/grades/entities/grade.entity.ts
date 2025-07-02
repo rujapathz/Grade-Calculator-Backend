@@ -1,11 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity('grades')
+@Unique(['name'])
 export class GradeEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'text', nullable: true })
+    @Column({ type: 'text', unique: true })
     name: string;
 
     @Column({ type: 'integer', nullable: true })
