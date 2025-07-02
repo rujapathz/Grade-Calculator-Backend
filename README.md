@@ -1,98 +1,163 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## Overview
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is the backend service of the Grade Calculator web application. It provides RESTful APIs to manage students' grade data including name, score, and calculated grade.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- Create a new grade with name and score
+- Automatically check for existing names before create or update
+- Retrieve all grades or filter by name
+- Update grade or score by ID with validation
+- Delete grade entries
+- Validation using DTOs and class-validator
+- Custom error handling using BadRequestException
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tech Stack
 
-## Project setup
+- **Language**: TypeScript
+- **Framework**: NestJS 11.0.7
+- **Database**: PostgreSQL 17.5
+- **ORM**: TypeORM
+- **Validation**: class-validator, class-transformer
 
-```bash
-$ yarn install
-```
+## Installation
 
-## Compile and run the project
+1. Install dependencies
 
-```bash
-# development
-$ yarn run start
+bash
+yarn install
 
-# watch mode
-$ yarn run start:dev
+2. Start development server
 
-# production mode
-$ yarn run start:prod
-```
+bash
+yarn start:dev
 
-## Run tests
+3. Open in backend API
 
-```bash
-# unit tests
-$ yarn run test
+bash
+http://localhost:4000/grades
 
-# e2e tests
-$ yarn run test:e2e
+## Configuration
 
-# test coverage
-$ yarn run test:cov
-```
+Create a .env file in the project root with the following environment variables to configure the database connection.
 
-## Deployment
+bash
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=your_user
+DB_PASSWORD=your_password
+DB_NAME=your_database
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Database Setup
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- Database: PostgreSQL
+- Connection: Managed via TypeORM in postgres.config.ts using .env variables:
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
-```
+### Using Docker
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+docker-compose.yml
 
-## Resources
+bash
+version: '3.8'
 
-Check out a few resources that may come in handy when working with NestJS:
+services:
+postgres:
+container_name: grade_calculator_postgres
+image: postgres
+environment:
+POSTGRES_DB: your_database
+POSTGRES_USER: your_user
+POSTGRES_PASSWORD: your_password
+PGDATA: /data/postgres
+TZ: Asia/Bangkok
+volumes: - postgres-data:/data/postgres
+ports: - '5432:5432'
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+volumes:
+postgres-data:
 
-## Support
+Start PostgreSQL service
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+bash
+docker-compose up -d
 
-## Stay in touch
+### Using SQL Script
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Alternatively, you can manually create the grades table by running this SQL script.
 
-## License
+sql
+CREATE TABLE IF NOT EXISTS grades (
+id SERIAL PRIMARY KEY,
+name TEXT UNIQUE NOT NULL,
+score INTEGER,
+grade TEXT
+);
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Project Structure
+
+bash
+src/
+├── config/
+│ └── postgres.config.ts
+├── grades/
+│ ├── dto/
+│ │ ├── create-grade.dto.ts
+│ │ └── update-grade.dto.ts
+│ ├── entities/
+│ │ └── grade.entity.ts
+│ ├── grades.controller.ts
+│ ├── grades.module.ts
+│ ├── grades.service.ts
+├── app.controller.ts
+├── app.module.ts
+├── main.ts
+
+#### Folder & File Descriptions
+
+- config/:
+  - postgres.config.ts: Database connection configuration using TypeORM and environment variables from env
+- grades/:
+  - dto/
+    - create-grade.dto.ts: DTO for creating a new grade entry, includes validation rules
+    - update-grade.dto.ts: DTO for updating a grade, with optional validated fields
+- entities/:
+  - grade.entity.ts: GradeEntity that maps to the grades table in PostgreSQL
+- grades.controller.ts: Handles HTTP requests and routes for the /grades endpoints
+- grades.module.ts: Declares and organizes all components related to the grades feature
+- grades.service.ts: Contains business logic for grade operations (create, read, update, delete)
+- app.controller.ts: Default root controller
+- app.module.ts: Root module that imports all feature modules, including GradesModule
+- main.ts: Application entry point that bootstraps the NestJS app
+
+## API Endpoints
+
+| Method | Endpoint    | Description                      |
+| ------ | ----------- | -------------------------------- |
+| GET    | /grades     | Get all grades or filter by name |
+| GET    | /grades/:id | Get grade by ID                  |
+| POST   | /grades     | Create new grade                 |
+| PATCH  | /grades/:id | Update grade by ID               |
+| DELETE | /grades/:id | Delete grade by ID               |
+
+## Validation
+
+All input is validated using DTOs with class-validator.
+
+#### CreateGradeDto
+
+- name: required, must be a non-empty string
+- score: required, must be an integer between 0–100
+
+#### UpdateGradeDto
+
+- All fields are optional
+- If name is provided, must not be duplicated
+- If score is provided, must be an integer between 0–100
+
+## Libraries Used
+
+- @nestjs/common
+- @nestjs/typeorm
+- pg (PostgreSQL client)
+- class-validator, class-transformer
+- @nestjs/common
