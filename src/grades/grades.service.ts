@@ -27,18 +27,17 @@ export class GradesService {
 }
 
   async findAll(): Promise<GradeEntity[]> { 
-    const testResults = await this.gradeRepository.find()
-    return testResults;
+    return await this.gradeRepository.find()
+    
   }
 
   async findOne(id: number): Promise<GradeEntity | null > { 
-    const dataUserID = await this.gradeRepository.findOneBy({id});
-    return dataUserID;
+    return await this.gradeRepository.findOneBy({id});
+    
   }
 
   async findByName(name: string): Promise<GradeEntity[]> { 
-  const findUserName = await this.gradeRepository.find({ where: { name } }); 
-  return findUserName;
+    return await this.gradeRepository.find({ where: { name } });  
 }
 
   async update(id: number, updateUserDto: UpdateGradeDto): Promise<GradeEntity | null> { 
