@@ -8,9 +8,10 @@ import { postgresConfig } from './config/postgres.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal : true}), 
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync(postgresConfig),
-    GradesModule],
+    GradesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

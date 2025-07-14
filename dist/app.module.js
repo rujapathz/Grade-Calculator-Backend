@@ -22,7 +22,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRootAsync(postgres_config_1.postgresConfig),
-            grades_module_1.GradesModule
+            grades_module_1.GradesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
