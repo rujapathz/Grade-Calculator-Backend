@@ -20,16 +20,16 @@ class CreateGradeDto {
 }
 exports.CreateGradeDto = CreateGradeDto;
 __decorate([
-    (0, class_validator_1.IsNotEmpty)({ message: "name should not be empty" }),
-    (0, class_validator_1.IsString)({ message: "name should not be characters" }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'name should not be empty' }),
+    (0, class_validator_1.IsString)({ message: 'name should not be characters' }),
     __metadata("design:type", String)
 ], CreateGradeDto.prototype, "name", void 0);
 __decorate([
     (0, class_transformer_1.Type)(() => Number),
-    (0, class_validator_1.IsNotEmpty)({ message: "score should not be empty" }),
-    (0, class_validator_1.IsInt)({ message: "score should be integer" }),
-    (0, class_validator_1.Min)(0, { message: "score should atleat 0" }),
-    (0, class_validator_1.Max)(100, { message: "score should lower than 100" }),
+    (0, class_validator_1.IsNotEmpty)({ message: 'score should not be empty' }),
+    (0, class_validator_1.IsInt)({ message: 'score should be integer' }),
+    (0, class_validator_1.Min)(0, { message: 'score should atleat 0' }),
+    (0, class_validator_1.Max)(100, { message: 'score should lower than 100' }),
     __metadata("design:type", Number)
 ], CreateGradeDto.prototype, "score", void 0);
 __decorate([
@@ -37,7 +37,9 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateGradeDto.prototype, "grade", void 0);
-class UpdateGradeDto extends (0, mapped_types_1.OmitType)(CreateGradeDto, ['name']) {
+class UpdateGradeDto extends (0, mapped_types_1.OmitType)(CreateGradeDto, [
+    'name',
+]) {
 }
 exports.UpdateGradeDto = UpdateGradeDto;
 //# sourceMappingURL=create-grade.dto.js.map
